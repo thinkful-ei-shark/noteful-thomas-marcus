@@ -7,10 +7,16 @@ import ApiContext from '../ApiContext'
 import './NoteListNav.css'
 
 export default class NoteListNav extends React.Component {
+  static defaultProps = {
+    history: { goBack: () => { } },
+    match: { params: {} }
+
+  }
   static contextType = ApiContext;
 
   render() {
     const { folders = [], notes = [] } = this.context
+
 
     return (
       <div className='NoteListNav'>
@@ -46,6 +52,7 @@ export default class NoteListNav extends React.Component {
   }
 }
 
-NoteListNav.defaultProps = {
-  folders: []
-}
+
+// const {noteId} = this.props.match.params
+//     const note = findNote(notes, noteId) || {}
+//     const folder = findFolder(folders, note.folderId)
