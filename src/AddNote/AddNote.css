@@ -1,0 +1,28 @@
+form {
+    display:flex;
+    flex-direction: column;
+    color: lightblue;
+    margin: 20px
+}
+
+input {
+    width: 50%;
+}
+
+.selectFolder {
+    width: 50%;
+}
+
+textarea {
+    min-height: 80px;
+    width: 50%;
+}
+
+.error-message {
+    color: red;
+    font-size: 20px;
+}
+
+button {
+    width: 50%;
+}

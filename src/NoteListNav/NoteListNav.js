@@ -1,58 +1,59 @@
-import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import CircleButton from '../CircleButton/CircleButton'
-import { countNotesForFolder } from '../notes-helpers'
-import ApiContext from '../ApiContext'
-import './NoteListNav.css'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AddFolder from "../AddFolder/AddFolder";
+import CircleButton from "../CircleButton/CircleButton";
+import ApiContext from "../ApiContext";
+import { countNotesForFolder } from "../notes-helpers";
+import "./NoteListNav.css";
 
-export default class NoteListNav extends React.Component {
-  static defaultProps = {
-    history: { goBack: () => { } },
-    match: { params: {} }
-
-  }
+class NoteListNav extends React.Component {
+  state = {
+    adding: false,
+  };
   static contextType = ApiContext;
 
+  addFolderHandler = () => {
+    console.log("notelist nav state before: ", this.state)
+    this.setState({ adding: !this.state.adding })
+    this.forceUpdate()
+    console.log("notelist nave state: ", this.state);
+  };
+
   render() {
-    const { folders = [], notes = [] } = this.context
-
-
+    const { folders = [], notes = [] } = this.context;
     return (
-      <div className='NoteListNav'>
-        <ul className='NoteListNav__list'>
-          {folders.map(folder =>
+      <div className="NoteListNav">
+        <ul className="NoteListNav__list">
+          {folders.map((folder) => (
             <li key={folder.id}>
               <NavLink
-                className='NoteListNav__folder-link'
+                className="NoteListNav__folder-link"
                 to={`/folder/${folder.id}`}
               >
-                <span className='NoteListNav__num-notes'>
+                <span className="NoteListNav__num-notes">
                   {countNotesForFolder(notes, folder.id)}
                 </span>
                 {folder.name}
               </NavLink>
             </li>
-          )}
+          ))}
         </ul>
-        <div className='NoteListNav__button-wrapper'>
+        <div className="NoteListNav__button-wrapper">
           <CircleButton
-            tag={Link}
-            to='/add-folder'
-            type='button'
-            className='NoteListNav__add-folder-button'
+            type="button"
+            className="NoteListNav__add-folder-button"
+            onClick={() => this.addFolderHandler()}
           >
-            <FontAwesomeIcon icon='plus' />
+            <FontAwesomeIcon icon="plus" />
             <br />
-          Folder
-        </CircleButton>
+            Folder
+          </CircleButton>
+          {this.state.adding && <AddFolder handleAdding={this.addFolderHandler} />}
         </div>
       </div>
-    )
+    );
   }
 }
 
-
-// const {noteId} = this.props.match.params
-//     const note = findNote(notes, noteId) || {}
-//     const folder = findFolder(folders, note.folderId)
+export default NoteListNav
