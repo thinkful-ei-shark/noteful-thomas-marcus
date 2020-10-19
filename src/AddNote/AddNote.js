@@ -135,7 +135,7 @@ class AddNote extends Component {
                         required
                         onChange={(event) => this.handleChangeContent(event)}
                     />
-                    {/** IF any validators return a value, submit button replaced by errorMessage */}
+                    {/** IF any validators return a value, submit button disabled */}
                     <input type="submit" disabled={this.validateName() || this.validateContent()} />
                     {errorMessage}
                 </form>

@@ -1,3 +1,16 @@
+/****************
+ * 
+ *  This component renders when add folder button is clicked.
+ *  Renders a simple small form with text box and submit button (or error)
+ * 
+ * 
+ * 
+ * 
+ */
+
+
+
+
 import React, { Component } from "react";
 import ApiContext from "../ApiContext";
 import './AddFolder.css'
@@ -76,7 +89,7 @@ class AddFolder extends Component {
                         onChange={(event) => this.handleChange(event)}
                         required
                     />
-                    {/**IF there is an error button will be replaced by error message */}
+                    {/**IF there is an error button will be dsiabled */}
                     <input type="submit" disabled={this.validateName()} />
                     {errorMessage}
                 </form>
