@@ -7,6 +7,9 @@ import ApiContext from "../ApiContext";
 import { countNotesForFolder } from "../notes-helpers";
 import "./NoteListNav.css";
 
+
+
+
 class NoteListNav extends React.Component {
   state = {
     adding: false,
